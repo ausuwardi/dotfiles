@@ -7,6 +7,14 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'preservim/nerdtree'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
+    Plug 'voldikss/vim-floaterm'
+
+    Plug 'dense-analysis/ale'
+    Plug 'isRuslan/vim-es6'
+    Plug 'SirVer/ultisnips'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     
     call plug#end()
 endif
@@ -52,3 +60,24 @@ colorscheme gruvbox
 let g:airline_theme='luna'
 let g:airline#extensions#tabline#enabled=1
 
+" Linting
+"let g:ale_fixers = {
+"            \ 'javascript': ['eslint'],
+"            \}
+"let g:ale_linters = {
+"            \ 'javascript': ['eslint'],
+"            \}
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackgwardTrigger="<c-z>"
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('sources', {
+            \ '_': ['ale', 'buffer']
+            \})
+
+" Floaterm
+nmap <Leader>t :FloatermNew<Enter>
