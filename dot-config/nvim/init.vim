@@ -11,6 +11,8 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
     Plug 'tpope/vim-surround'
     Plug 'voldikss/vim-floaterm'
 
+    Plug 'elixir-editors/vim-elixir'
+
     Plug 'dense-analysis/ale'
     Plug 'isRuslan/vim-es6'
     Plug 'SirVer/ultisnips'
@@ -80,4 +82,5 @@ call deoplete#custom#option('sources', {
             \})
 
 " Floaterm
-nmap <Leader>t :FloatermNew<Enter>
+nmap <Leader>t :FloatermToggle<Enter>
+nmap <Leader>T :FloatermNew<Enter>
