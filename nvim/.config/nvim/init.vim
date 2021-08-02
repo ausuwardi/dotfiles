@@ -4,12 +4,14 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'flazz/vim-colorschemes'
     Plug 'editorconfig/editorconfig-vim'
-    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'preservim/nerdtree'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'voldikss/vim-floaterm'
+
+    Plug 'alok/notational-fzf-vim'
 
     Plug 'elixir-editors/vim-elixir'
 
@@ -84,3 +86,6 @@ call deoplete#custom#option('sources', {
 " Floaterm
 nmap <Leader>t :FloatermToggle<Enter>
 nmap <Leader>T :FloatermNew<Enter>
+
+" notational-fzf-vim
+let g:nv_search_paths = ['~/notes']
