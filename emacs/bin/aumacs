@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mypath="$(dirname "`readlink -f "$0"`")"
+
+emacs -q -l $mypath/../.aumacs/init.el
