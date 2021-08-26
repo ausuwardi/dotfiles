@@ -575,6 +575,9 @@ you should place your code here."
   (global-set-key (kbd "C-c n d") 'org-roam-dailies-goto-today)
   (global-set-key (kbd "C-c n t") 'org-roam-dailies-goto-tomorrow)
   (global-set-key (kbd "C-c n y") 'org-roam-dailies-goto-yesterday)
+
+  ;; org-roam autosync
+  (org-roam-db-autosync-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
