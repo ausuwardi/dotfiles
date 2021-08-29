@@ -60,7 +60,9 @@
 
 (use-package counsel
   :bind*
-  (("M-x"      . counsel-M-x)))
+  (("M-x"      . counsel-M-x))
+  :config
+  (setq ivy-initial-inputs-alist nil))  ;; Don't start searches with ^
 
 (use-package which-key
   :init
@@ -69,8 +71,12 @@
   (which-key-setup-side-window-right-bottom)
   (setq which-key-sort-order 'which-key-key-order-alpha
 	which-key-side-window-max-width 0.33
-	which-key-idle-delay 0.05)
+	which-key-idle-delay 1)
   :diminish which-key-mode)
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
 
 (use-package all-the-icons)
 
@@ -94,3 +100,17 @@
   (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+;; Editing stuff
+;; Line numbers
+(column-number-mode)
+(global-display-line-numbers-mode t)
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		shell-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
