@@ -174,6 +174,27 @@
 (anes/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
 
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projetile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/code")
+    (setq projectile-project-search-path '("~/code")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
+
+(use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+(use-package evil-magit
+  :after magit)
+
 ;; Editing stuff
 ;; Line numbers
 (column-number-mode)
