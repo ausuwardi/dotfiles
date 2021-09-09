@@ -235,8 +235,8 @@
   (set-face-attribute 'org-superstar-leading nil :height 0.8)
   :custom
   ;; Set different bullets, with one getting a terminal fallback
-  ;;(org-superstar-headline-bullets-list
-  ;; '("◉" ("🞛" ?◈) "○" "▷"))
+  (org-superstar-headline-bullets-list
+   '("◉" "○" "●" "▷" "○"))
   ;; Stop cycling bullets to emphasize hierarchy of headlines
   (org-superstar-cycle-headline-bullets nil)
   ;; Hide away leading stars on terminal
@@ -304,7 +304,7 @@
 	      ((x-list-fonts "Sans Serif")     '(:family "Sans Serif"))
 	      (nil (warn "Cannot find a Sans Serif Font. Install Fira Sans."))))
        (base-font-color (face-foreground 'default nil 'default))
-       (headline       `(:inherit default :weight bold :foreground, base-font-color)))
+       (headline       `(:inherit default :weight bold)))
   (custom-theme-set-faces
    'user
    `(variable-pitch ((t (:family "Noto Sans" :height 120 :weight medium))))
@@ -328,10 +328,10 @@
    `(org-level-7 ((t (,@headline ,@variable-tuple))))
    `(org-level-6 ((t (,@headline ,@variable-tuple))))
    `(org-level-5 ((t (,@headline ,@variable-tuple))))
-   `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1 :weight bold))))
-   `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.2 :weight bold))))
-   `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.4 :weight bold))))
-   `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.6 :weight bold))))
+   `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+   `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.2))))
+   `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.4))))
+   `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.6))))
    `(org-document-title ((t (,@headline ,@variable-tuple :height 1.8 :underline nil))))))
 
 ;; References
