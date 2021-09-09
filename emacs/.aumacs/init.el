@@ -11,7 +11,7 @@
 ;; Set up visible bell
 (setq visible-bell t)
 
-(set-face-attribute 'default nil :font "Iosevka SS10" :height 100)
+(set-face-attribute 'default nil :font "Iosevka SS10" :height 120)
 
 (load-theme 'tango-dark t)
 
@@ -85,8 +85,8 @@
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 28))
   :config
-  (set-face-attribute 'mode-line nil :family "Envy Code R" :height 100)
-  (set-face-attribute 'mode-line-inactive nil :family "Envy Code R" :height 100))
+  (set-face-attribute 'mode-line nil :family "Envy Code R" :height 120)
+  (set-face-attribute 'mode-line-inactive nil :family "Envy Code R" :height 120))
 
 (use-package doom-themes
   :ensure t
@@ -225,9 +225,20 @@
   :bind (("C-c l" . org-store-link)
 	 ("C-c a" . org-agenda)))
 
-(use-package org-bullets
+(use-package org-superstar
   :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  (set-face-attribute 'org-superstar-item nil :height 0.7)
+  (set-face-attribute 'org-superstar-header-bullet nil :height 0.7)
+  (set-face-attribute 'org-superstar-leading nil :height 0.8)
+  :custom
+  ;; Set different bullets, with one getting a terminal fallback
+  ;;(org-superstar-headline-bullets-list
+  ;; '("◉" ("🞛" ?◈) "○" "▷"))
+  ;; Stop cycling bullets to emphasize hierarchy of headlines
+  (org-superstar-cycle-headline-bullets nil)
+  ;; Hide away leading stars on terminal
+  (org-superstar-leading-fallback ?\s))
 
 (use-package org-autolist
   :config
@@ -249,7 +260,19 @@
   :config
   (org-roam-db-autosync-mode))
 
-(use-package org-tree-slide)
+(use-package org-tree-slide
+  :ensure t
+  :bind (("<f8>" . org-tree-slide-mode)
+	 ("S-<f8>" . org-tree-slide-skip-done-toggle)
+	 :map org-tree-slide-mode-map
+	 ("<f9>" . org-tree-slide-move-previous-tree)
+	 ("<f10>" . org-tree-slide-move-next-tree)
+	 ("<f11>" . org-tree-slide-content))
+  :custom
+  (org-tree-slide-skip-outline-level 4)
+  (org-tree-slide-skip-done nil)
+  :config
+  (org-tree-slide-presentation-profile))
 
 ;; Editing stuff
 ;; Line numbers
@@ -264,18 +287,19 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 
+(setq inihibit-compacting-font-caches t)
 (let* ((variable-tuple
-	(cond ((x-list-fonts "Fira Sans")      '(:font "Fira Sans"))
-	      ((x-list-fonts "Noto Sans")         '(:font "Noto Sans"))
-	      ((x-list-fonts "Roboto")      '(:font "Roboto"))
+	(cond ((x-list-fonts "Noto Sans")      '(:font "Noto Sans"))
+	      ((x-list-fonts "Roboto")         '(:font "Roboto"))
+	      ((x-list-fonts "Fira Sans")      '(:font "Fira Sans"))
 	      ((x-list-fonts "Sans Serif")     '(:family "Sans Serif"))
 	      (nil (warn "Cannot find a Sans Serif Font. Install Fira Sans."))))
        (base-font-color (face-foreground 'default nil 'default))
        (headline       `(:inherit default :weight bold :foreground, base-font-color)))
   (custom-theme-set-faces
    'user
-   `(variable-pitch ((t (:family "Noto Sans" :height 100 :weight medium))))
-   `(fixed-pitch ((t (:family "Iosevka SS10" :height 100))))
+   `(variable-pitch ((t (:family "Noto Sans" :height 120 :weight medium))))
+   `(fixed-pitch ((t (:family "Iosevka SS10" :height 120))))
    `(org-block ((t (:inherit fixed-pitch))))
    `(org-code ((t (:inherit (shadow fixed-pitch)))))
    `(org-document-info ((t (:foreground "dark-orange"))))
@@ -286,7 +310,7 @@
    `(org-property-value ((t (:inherit fixed-pitch))) t)
    `(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
    `(org-table ((t (:inherit fixed-pitch))))
-   `(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+   `(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.9))))
    `(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
    `(org-level-8 ((t (,@headline ,@variable-tuple))))
    `(org-level-7 ((t (,@headline ,@variable-tuple))))
