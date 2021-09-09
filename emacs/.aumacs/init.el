@@ -198,6 +198,8 @@
   :custom
   (org-log-done t)
   (org-agenda-files (list "~/org/gtd.org"))
+  (org-todo-keywords
+   '((sequence "TODO" "DOING" "WAIT" "VERIFY" "|" "DONE" "CANCEL" "DELEGATE")))
   (org-src-fontify-natively t)
   (org-src-tab-acts-natively t)
   (org-babel-default-header-args '((:eval . "never-export")))
@@ -319,15 +321,18 @@
    `(org-table ((t (:inherit fixed-pitch))))
    `(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.9))))
    `(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+   `(org-todo ((t (:inherit fixed-pitch))))
+   `(org-done ((t (:inherit fixed-pitch)))) 
+   `(org-date ((t (:inherit fixed-pitch))))
    `(org-level-8 ((t (,@headline ,@variable-tuple))))
    `(org-level-7 ((t (,@headline ,@variable-tuple))))
    `(org-level-6 ((t (,@headline ,@variable-tuple))))
    `(org-level-5 ((t (,@headline ,@variable-tuple))))
-   `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
-   `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.2))))
-   `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.3))))
-   `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.4))))
-   `(org-document-title ((t (,@headline ,@variable-tuple :height 1.6 :underline nil))))))
+   `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1 :weight bold))))
+   `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.2 :weight bold))))
+   `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.4 :weight bold))))
+   `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.6 :weight bold))))
+   `(org-document-title ((t (,@headline ,@variable-tuple :height 1.8 :underline nil))))))
 
 ;; References
 ;; https://zzamboni.org/post/beautifying-org-mode-in-emacs/
