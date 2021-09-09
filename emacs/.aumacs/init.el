@@ -274,6 +274,13 @@
   :config
   (org-tree-slide-presentation-profile))
 
+;; Python
+(use-package elpy
+  :ensure t
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
+
 ;; Editing stuff
 ;; Line numbers
 (column-number-mode)
