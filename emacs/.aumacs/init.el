@@ -328,11 +328,12 @@
   ;; Ad the project file to the agenda after capture is finished
   (add-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
   
+  (setq tag-name "Project")
   ;; Select a project file to open, creating it if necessary
   (org-roam-node-find
    nil
    nil
-   (my/org-roam-filter-by-tag "Project")
+   (my/org-roam-filter-by-tag tag-name)
    :templates
    '(("p" "project" plain "* Goals\n\n%?\n\n* Documents\n\n* References\n\n* Tasks\n\n** TODO Add tasks here\n\n* Dates\n\n"
    :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
