@@ -383,12 +383,38 @@
 	       (when (equal org-state "DONE")
 		 (my/org-roam-copy-todo-to-today))))
     
+;; Markdown
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+	 ("\\.md\\'" . markdown-mode)
+	 ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
 ;; Python
 (use-package elpy
   :ensure t
   :defer t
   :init
   (advice-add 'python-mode :before 'elpy-enable))
+
+;; Emmet
+(use-package emmet-mode
+  :ensure t
+  :defer t
+  :hook
+  (sgml-mode . emmet-mode)
+  (css-mode . emmet-mode)
+  :custom
+  (emmet-move-cursor-between-quotes t))
+
+;; YAML
+(use-package yaml-mode
+  :ensure t
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 
 ;; Editing stuff
 ;; Line numbers
