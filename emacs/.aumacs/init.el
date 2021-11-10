@@ -314,9 +314,13 @@
 	   (my/org-roam-filter-by-tag tag-name)
 	   (org-roam-node-list))))
 
+(require 'cl-lib)
 (defun my/org-roam-refresh-agenda-list ()
   (interactive)
-  (setq org-agenda-files (my/org-roam-list-notes-by-tag "Project")))
+  (setq org-agenda-files
+	(cl-union (my/org-roam-list-notes-by-tag "Project")
+		  (my/org-roam-list-notes-by-tag "gtd")
+	)))
 
 ;; Build the agenda list the first time for the session
 (my/org-roam-refresh-agenda-list)
@@ -358,10 +362,11 @@
   ;; Add the project file to the agenda after capture is finished
   (add-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
 
+  (setq tag-name "Project")
   ;; Capture the new task, creating the project file if necessary
   (org-roam-capture- :node (org-roam-node-read
 			    nil
-			    (my/org-roam-filter-by-tag "Project"))
+			    (my/org-roam-filter-by-tag tag-name))
 		     :templates '(("p" "project" plain "** TODO %?"
 				   :if-new (file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
 							  "#+title: ${title}\n#+category: ${title}\n#+filetags: Project"
