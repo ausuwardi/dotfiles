@@ -19,6 +19,8 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
     Plug 'isRuslan/vim-es6'
     Plug 'SirVer/ultisnips'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+    Plug 'wakatime/vim-wakatime'
     
     call plug#end()
 endif
