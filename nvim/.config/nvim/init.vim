@@ -41,6 +41,9 @@ set t_Co=256
 
 let mapleader=","
 
+" --- python infrastructure
+let g:python3_host_prog="$HOME/.local/share/nvim/venv/bin/python3"
+
 " --- fzf
 nmap <Leader>F :Files<Enter>
 nmap <Leader>g :Rg 
