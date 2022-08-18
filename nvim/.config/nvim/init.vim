@@ -1,31 +1,13 @@
 
-silent! if plug#begin('~/.local/share/nvim/plugged')
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'flazz/vim-colorschemes'
-    Plug 'editorconfig/editorconfig-vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'preservim/nerdtree'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-surround'
-    Plug 'voldikss/vim-floaterm'
+" Plugins
+source ~/.config/nvim/plugins.vim
 
-    Plug 'alok/notational-fzf-vim'
-
-    Plug 'elixir-editors/vim-elixir'
-
-    Plug 'hashivim/vim-terraform'
-
-    Plug 'dense-analysis/ale'
-    Plug 'isRuslan/vim-es6'
-    Plug 'SirVer/ultisnips'
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-    Plug 'wakatime/vim-wakatime'
-    
-    call plug#end()
-endif
+" LSP Configuration
+source ~/.config/nvim/lspconfig.vim
+luafile ~/.config/nvim/compe-config.lua
+" Per-language LSP configuration, see:
+"   https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+luafile ~/.config/nvim/lua/lsp/python-ls.lua
 
 " Editing stuff
 syntax on
@@ -79,17 +61,6 @@ let g:airline#extensions#tabline#enabled=1
 "let g:ale_linters = {
 "            \ 'javascript': ['eslint'],
 "            \}
-
-" Ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackgwardTrigger="<c-z>"
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('sources', {
-            \ '_': ['ale', 'buffer']
-            \})
 
 " Floaterm
 nmap <Leader>t :FloatermToggle<Enter>
