@@ -48,6 +48,7 @@ let g:python3_host_prog="$HOME/.local/share/nvim/venv/bin/python3"
 
 " --- fzf
 nmap <Leader>F :Files<Enter>
+nmap <Leader>b :Buffers<Enter>
 nmap <Leader>g :Rg 
 
 " --- NERDtree
