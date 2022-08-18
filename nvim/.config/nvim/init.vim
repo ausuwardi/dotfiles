@@ -15,6 +15,8 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'elixir-editors/vim-elixir'
 
+    Plug 'hashivim/vim-terraform'
+
     Plug 'dense-analysis/ale'
     Plug 'isRuslan/vim-es6'
     Plug 'SirVer/ultisnips'
