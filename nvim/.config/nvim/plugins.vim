@@ -38,6 +38,9 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
     " elixir support
     Plug 'elixir-editors/vim-elixir'
 
+    " Neo4j
+    Plug 'neo4j-contrib/cypher-vim-syntax'
+
     " Terraform
     Plug 'hashivim/vim-terraform'
 
