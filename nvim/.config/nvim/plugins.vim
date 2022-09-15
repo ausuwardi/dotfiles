@@ -48,6 +48,10 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-compe'
 
+    " vsnip for lsp-based snippets
+    Plug 'hrsh7th/vim-vsnip'
+    Plug 'hrsh7th/vim-vsnip-integ'
+
     " Real time syntax check & linting
     Plug 'dense-analysis/ale'
 
