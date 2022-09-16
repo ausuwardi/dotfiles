@@ -1,0 +1,3 @@
+" General keybindings
+
+let mapleader=","

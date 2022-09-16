@@ -1,11 +1,18 @@
 " auto-install vim-plug
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-    silent !curl -fLo ${HOME}/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall | source $MYVIMRC
+let site_dir = has('nvim') ? stdpath('data').'/site' : '~/.vim'
+let autoload_dir = site_dir.'/autoload'
+let plugs_dir = site_dir.'/plugged'
+
+if empty(glob(autoload_dir.'/plug.vim'))
+    silent execute '!curl -fLo '.autoload_dir.'/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    let g:ax_plug_initiating='y'
 endif
 
-silent! if plug#begin('~/.local/share/nvim/plugged')
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+call plug#begin(plugs_dir)
     " airline
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -38,19 +45,19 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
     " elixir support
     Plug 'elixir-editors/vim-elixir'
 
-    " Neo4j
-    Plug 'neo4j-contrib/cypher-vim-syntax'
-
     " Terraform
     Plug 'hashivim/vim-terraform'
 
     " LSP and 'intellisense'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/nvim-compe'
+    " For now, it's neovim only
+    if has('nvim')
+        Plug 'neovim/nvim-lspconfig'
+        Plug 'hrsh7th/nvim-compe'
 
-    " vsnip for lsp-based snippets
-    Plug 'hrsh7th/vim-vsnip'
-    Plug 'hrsh7th/vim-vsnip-integ'
+        " vsnip for lsp-based snippets
+        Plug 'hrsh7th/vim-vsnip'
+        Plug 'hrsh7th/vim-vsnip-integ'
+    endif
 
     " Real time syntax check & linting
     Plug 'dense-analysis/ale'
@@ -61,5 +68,4 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
     " Track time spent on editing files
     Plug 'wakatime/vim-wakatime'
     
-    call plug#end()
-endif
+call plug#end()
