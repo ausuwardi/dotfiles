@@ -20,8 +20,8 @@ if g:ax_plug_initiating == 'n'
     source ~/.config/nvim/lsp/lspconfig.vim
     luafile ~/.config/nvim/lsp/compe-config.lua
     " Per-language LSP configuration, see:
-    "   https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+    "   https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
     luafile ~/.config/nvim/lsp/python-ls.lua
-
+    luafile ~/.config/nvim/lsp/rust-ls.lua
 endif
 
