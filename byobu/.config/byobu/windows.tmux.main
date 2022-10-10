@@ -1,5 +1,5 @@
 new-session 'main' ;
-new-window -n system ;
+rename-window -n system ;
 split-window -h btop ;
 select-pane -t 0 ;
 split-window -v ;
