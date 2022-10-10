@@ -1,5 +1,6 @@
 .screenrc
 .tmux.conf
+.welcome-displayed
 backend
 color
 color.tmux
