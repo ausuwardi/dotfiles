@@ -1,0 +1,15 @@
+.screenrc
+.tmux.conf
+backend
+color
+color.tmux
+datetime.tmux
+keybindings
+keybindings.tmux
+profile
+profile.tmux
+prompt
+status
+statusrc
+windows
+windows.tmux

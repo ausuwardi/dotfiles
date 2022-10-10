@@ -1,0 +1,9 @@
+new-session 'main' ;
+new-window -n system ;
+split-window -h btop ;
+select-pane -t 0 ;
+split-window -v ;
+select-pane -t 0;
+resize-pane -x 40% ;
+resize-pane -y 60% ;
+send-keys -t 0 'neofetch' Enter ;
