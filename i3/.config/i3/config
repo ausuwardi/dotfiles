@@ -220,6 +220,7 @@ set $darkgray #1d2021
 bar {
     position bottom
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    tray_output primary
     colors {
         # bar background color
         background $bg
