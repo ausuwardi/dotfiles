@@ -63,6 +63,11 @@ require('packer').startup(function(use)
   -- Editorconfig support
   use 'gpanders/editorconfig.nvim'
 
+  -- Notational fzf
+  use 'junegunn/fzf'
+  use 'alok/notational-fzf-vim'
+  vim.g.nv_search_paths = {"~/notes", "./docs"}
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
