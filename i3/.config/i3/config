@@ -187,6 +187,10 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+assign [class="obsidian"] 2
+assign [class="Google-chrome"] 3
+assign [class="calibre"] 4
+
 exec ~/.fehbg
 exec dropbox start -i
 exec blueman-applet
@@ -198,7 +202,7 @@ exec flameshot
 exec megasync
 exec lxpolkit
 
-exec --no-startup-id i3-msg 'workspace 1; exec alacritty -e sh -c "BYOBU_WINDOWS=main exec byobu"'
+exec --no-startup-id i3-msg 'workspace 1; exec alacritty -e sh -c "BYOBU_WINDOWS=main exec byobu"; workspace 2; exec obsidian; workspace 1'
 
 
 #######
