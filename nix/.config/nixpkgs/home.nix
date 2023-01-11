@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  targets.genericLinux.enable = true;
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "agustian";
@@ -99,6 +100,8 @@
     jq
     ranger
     httpie
+    btop
+    neofetch
   ];
 
   xdg.configFile.nvim = {
