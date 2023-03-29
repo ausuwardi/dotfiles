@@ -63,10 +63,31 @@ require('packer').startup(function(use)
   -- Editorconfig support
   use 'gpanders/editorconfig.nvim'
 
+  -- Wakatime
+  use 'wakatime/vim-wakatime'
+
   -- Notational fzf
   use 'junegunn/fzf'
   use 'alok/notational-fzf-vim'
-  vim.g.nv_search_paths = {"~/notes", "./docs"}
+  vim.g.nv_search_paths = { '~/Documents/notes', './docs' }
+
+  -- NVIM Tree
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    tag = 'nightly'
+  }
+
+  -- Toggleterm
+  use {
+    'akinsho/toggleterm.nvim',
+    tag = '*',
+    config = function()
+      require('toggleterm').setup()
+    end
+  }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -348,7 +369,7 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua', 'gopls' }
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'lua_ls', 'gopls' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
@@ -376,7 +397,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-require('lspconfig').sumneko_lua.setup {
+require('lspconfig').lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -399,6 +420,10 @@ require('lspconfig').sumneko_lua.setup {
     },
   },
 }
+
+-- NVIM Tree setup
+require("nvim-tree").setup()
+vim.keymap.set('n', '<leader>ft', ':NvimTreeToggle<CR>', { desc = 'Toggle Nvim Tree' })
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -442,6 +467,25 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- ToggleTerm configuration
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+-- This keymap will invoke ToggleTerm on <leader>tt
+-- When in an active terminal, if you want to open a new terminal session (split new terminal)
+-- press ESC to enter Normal mode and type 2<leader>tt to open second terminal, 3<leader>tt
+-- for the third, and so on.
+vim.keymap.set('n', '<leader>tt', ':ToggleTerm<CR>', { desc = '[T]oggle [T]erminal' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
