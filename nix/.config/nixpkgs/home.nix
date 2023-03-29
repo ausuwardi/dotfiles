@@ -4,8 +4,8 @@
   targets.genericLinux.enable = true;
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "agustian";
-  home.homeDirectory = "/home/agustian";
+  home.username = "anes";
+  home.homeDirectory = "/home/anes";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -43,7 +43,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "kubectl" "kube-ps1" ];
+      plugins = [ "git" "kubectl" "kube-ps1" "npm" ];
       theme = "robbyrussell";
     };
 
@@ -107,6 +107,10 @@
   xdg.configFile.nvim = {
     source = ./config/nvim;
     recursive = true;
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
   };
 }
 
