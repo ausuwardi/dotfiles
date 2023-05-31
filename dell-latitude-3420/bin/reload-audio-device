@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# This is a script to fix the issue where audio stops working after
+# the laptop wakes up from suspend.
+# It basically remove the audio device and trigger rescan for device
+
+sudo -v
+if [[ $! -ne 0 ]]; then
+  echo "This script requires sudo" > /dev/stderr
+  exit 1
+fi
+
+AUDIO_PCI_DEVICE=${AUDIO_PCI_DEVICE:-0000:00:1f.3}
+
+dev_info="$(lcpci -s $AUDIO_PCI_DEVICE)"
+if [[ -z $dev_info ]]; then
+  echo "Could not identify device $AUDIO_PCI_DEVICE" > /dev/stderr
+  exit 2
+fi
+
+echo "Reloading $dev_info"
+
+echo 1 | sudo tee /sys/bus/pci/devices/$AUDIO_PCI_DEVICE/remove
+sleep 2s
+echo 1 | sudo tee /sys/bus/pci/rescan
+
+exit 0
