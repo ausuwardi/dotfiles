@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NOTE_DIR=${NOTE_DIR:-~/Documents/notes}
+NOTE_DIR=${NOTE_DIR:-~/Documents/Notes}
 DAILY_TEMPLATE=$NOTE_DIR/templates/daily.md
 
 cd "$NOTE_DIR"
