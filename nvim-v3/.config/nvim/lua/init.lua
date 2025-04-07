@@ -72,7 +72,7 @@ require('packer').startup(function(use)
   -- Notational fzf
   use 'junegunn/fzf'
   use 'alok/notational-fzf-vim'
-  vim.g.nv_search_paths = { '~/Documents/notes', './docs' }
+  vim.g.nv_search_paths = { '~/Documents/Notes', './docs' }
 
   -- NVIM Tree
   use {
