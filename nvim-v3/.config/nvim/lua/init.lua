@@ -63,6 +63,9 @@ require('packer').startup(function(use)
   -- Editorconfig support
   use 'gpanders/editorconfig.nvim'
 
+  -- Ledger
+  use 'ledger/vim-ledger'
+
   -- Wakatime
   use 'wakatime/vim-wakatime'
 
