@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+
+function get_device () {
+    # Get xinput devices and store in array
+    mapfile -t devices < <(xinput list --name-only)
+    
+    PS3="Select a device: "
+    select device in "${devices[@]}"; do
+        if [[ -n "$device" ]]; then
+            TP_DEV_NAME="$device"
+    	    break
+        else
+            echo "Invalid selection. Try again."
+        fi
+    done
+}
+
+if [[ -z "$TP_DEV_NAME" ]]; then
+    get_device
+fi
+
+if [[ -n "$TP_DEV_NAME" ]]; then
+    echo "Setting up $TP_DEV_NAME"
+    echo "Enable natural scrolling"
+    xinput set-prop "$TP_DEV_NAME" 'libinput Natural Scrolling Enabled' 1
+    echo "Configure clickpad"
+    xinput set-prop "$TP_DEV_NAME" 'libinput Click Method Enabled' 0 1
+    echo "Done"
+fi
