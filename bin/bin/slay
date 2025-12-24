@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+LAYOUTDIR=$HOME/.screenlayout
+
+script=$(ls $LAYOUTDIR/ | xargs zenity --list --text='Select layout' --column='Layout')
+if [[ ! -z $script && -x $LAYOUTDIR/$script ]]; then
+    $LAYOUTDIR/$script
+fi
+
