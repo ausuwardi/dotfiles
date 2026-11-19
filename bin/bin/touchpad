@@ -2,20 +2,53 @@
 import subprocess
 
 tpconfig = {
-    "DELL0B20:00 04F3:3146 Touchpad": [
-        ["libinput Natural Scrolling Enabled", "1"],
-        ["libinput Click Method Enabled", "0", "1" ]
-    ],
-    "MI Wireless Receiver Mouse": [
-        ["libinput Natural Scrolling Enabled", "1"],
-    ]
+    "DELL0B20:00 04F3:3146 Touchpad": {
+        "type": "touchpad",
+        "libinput_config": [
+            ["libinput Natural Scrolling Enabled", "1"],
+            ["libinput Click Method Enabled", "0", "1" ],
+        ]
+     },
+    "MI Wireless Receiver Mouse": {
+        "type": "mouse",
+        "libinput_config": [
+            ["libinput Natural Scrolling Enabled", "1"],
+        ]
+    },
+    "Logitech USB Receiver Mouse": {
+        "type": "mouse", 
+        "libinput_config": [
+            ["libinput Natural Scrolling Enabled", "1"],
+        ]
+    },
+    "MX Master 4 Mouse": {
+        "type": "mouse",
+        "libinput_config": [
+            ["libinput Natural Scrolling Enabled", "1"],
+        ]
+    }
 }
+devices = subprocess.run(["xinput", "list", "--name-only"], stdout=subprocess.PIPE).stdout.decode().split('\n')
 
-devices = subprocess.run(["xinput", "list", "--name-only"], stdout=subprocess.PIPE).stdout.decode()
+mouse_connected = False
 
-for dev in devices.split('\n'):
-    if dev in tpconfig:
+# Configure connected devices
+for dev in tpconfig:
+    if dev in devices:
         print(f"Configuring {dev}")
-        for config in tpconfig[dev]:
+        for config in tpconfig[dev]["libinput_config"]:
             subprocess.run(["xinput", "set-prop", dev] + config)
+        if tpconfig[dev]["type"] == "mouse":
+            mouse_connected = True
+        tpconfig[dev]["connected"] = True
 
+# Disable touchpad devices if mouse detected
+for dev in tpconfig:
+    devconfig = tpconfig[dev]
+    if devconfig["type"] == "touchpad":
+        if mouse_connected:
+            print(f"Disabling touchpad {dev}")
+            subprocess.run(["xinput", "disable", dev])
+        else:
+            print(f"Enabling touchpad {dev}")
+            subprocess.run(["xinput", "enable", dev])
