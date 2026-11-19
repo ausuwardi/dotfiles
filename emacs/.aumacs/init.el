@@ -13,7 +13,7 @@
 ;; Set up visible bell
 (setq visible-bell t)
 
-(set-face-attribute 'default nil :font "Iosevka SS10" :height 120)
+(set-face-attribute 'default nil :font "IosevkaTerm Nerd Font" :height 120)
 
 (load-theme 'tango-dark t)
 
@@ -82,13 +82,15 @@
 
 (use-package all-the-icons)
 
+(use-package nerd-icons)
+
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 28))
   :config
-  (set-face-attribute 'mode-line nil :family "Envy Code R" :height 120)
-  (set-face-attribute 'mode-line-inactive nil :family "Envy Code R" :height 120))
+  (set-face-attribute 'mode-line nil :family "EnvyCodeR Nerd Font" :height 120)
+  (set-face-attribute 'mode-line-inactive nil :family "EnvyCodeR Nerd Font" :height 120))
 
 (use-package doom-themes
   :ensure t
